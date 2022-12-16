@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>
+        #like-dislike .body {
+            margin: 40px;
+            cursor: pointer;
+        }
+
+        #like-dislike .button {
+            cursor: pointer;
+            outline: 0;
+            color: rgb(255, 255, 255);
+        }
+
+        #like-dislike .btn:focus {
+            outline: none;
+        }
+
+        #like-dislike .green {
+            color: rgb(11, 131, 252);
+        }
+
+        #like-dislike .red {
+            color: red;
+        }
+
+        .comment-area {
+            margin-bottom: 50px;
+        }
+
+        .comment-area textarea {
+            width: 100%;
+            min-height: 10px;
+            padding: 10px;
+            margin-block: 10px;
+        }
+
+        .comment-area input {
+            float: right;
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .comment-area input:hover {
+            border: solid 1px #000000;
+        }
+    </style>
+    <title></title>
+
+</head>
+
+<body>
+    <!-- Nav bar -->
+    <nav class="navbar navbar-expand-lg shadow bg-light mb-3">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    </li> -->
+                </ul>
+                <!-- <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form> -->
+            </div>
+        </div>
+    </nav>
+    
+    <!-- card -->
+    <div class="sticky-top shadow-sm" >
+
+        <!-- post -->
+        <div class="post-body container">
+            
+        </div>
+
+    <!-- like -->
+        <div class="container shadow p-3 mb-3 bg-body rounded" style="width:70rem" >
+            <div class="row">
+                <div class="col-3" style="margin:auto;">
+                    <div id="like-dislike">
+                        <script src="https://use.fontawesome.com/fe459689b4.js"></script>
+                        
+                        <button class="btn" id="green"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn" id="red"><i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating"style="width: 30rem;">
+                        <textarea class="form-control" placeholder="Leave a comment here" id="comment"></textarea>
+                        <label for="comment">Comments</label>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div style="margin-top: 10px;margin-left:-70px">
+                        <input class="btn btn-primary" id="submit" type="submit" value="Submit">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Comments -->
+    <div class="comment">
+    <!-- <div class="alert alert-success card shadow p-3 mb-5 bg-body rounded" role="alert" style="width: 70rem;margin:auto">
+        A simple success alert—check it out!
+        <div class="row align-items-end">
+            <div class="col">
+                <hr>
+                <h6 style="text-align: center;">AuthorName</h4>
+            </div>
+            <div class="col">
+
+            </div>
+            <div class="col">
+                
+            </div>
+        </div>
+    </div> -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <script>
+        async function postData(url = '', data = {}) {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            let rdata = await response.json()
+            return rdata
+        }
+
+        // Fetch all the posts
+        async function fetchPost() {
+            const _id = localStorage.getItem('_id')
+            console.log(_id)
+
+            let postContainer = document.querySelector(".post-body")
+            postContainer.innerHTML = ""
+
+            const posts = await postData('/getpost', { _id })
+            console.log(posts)
+            let post = `
+            <div class="card p-3 bg-body rounded" style="width: 70rem;margin:auto">
+                <div class="card-header">
+                    <h5>${posts.posts.title}</h5>
+                </div>
+                <div class="card-body ">
+                    <h6 class="card-subtitle mb-2 text-muted">${posts.posts.subject}</h6>
+                    <p class="card-text">${posts.posts.desc}</p>
+                    <div class="row align-items-end">
+                        <div class="col">
+                            <b>
+                                <hr>
+                            </b>
+                            <h6 style="text-align: center;">${posts.posts.name}</h4>
+                        </div>
+                        <div class="col">
+
+                        </div>
+                        <div class="col">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `
+            postContainer.innerHTML += post
+        }
+
+        // Fetch all the comments
+        async function fetchComment() {
+            const id = localStorage.getItem('_id')
+            console.log(id)
+
+            let commentContainer = document.querySelector(".comment")
+            commentContainer.innerHTML = ""
+
+            const comments = await postData('/getcomment', { id })
+            // comments.then((comments) => {
+            //     console.log("Comments", comments.comments)
+                //populate the posts
+                comments.comments.slice().reverse().forEach(element => {
+                    let comment = `
+                    <div class="alert alert-success card shadow p-3 mb-2 bg-body rounded" role="alert" style="width: 70rem;margin:auto">
+                    ${element.comment}
+                        <div class="row align-items-end">
+                            <div class="col">
+                            <hr>
+                                <h6 style="text-align: center;">${element.name}</h4>
+                            </div>
+                            <div class="col">
+
+                            </div>
+                            <div class="col">
+                
+                            </div>
+                        </div>
+                    </div>
+                    `
+
+                    commentContainer.innerHTML += comment
+                });
+            // })
+        }
+
+        // Add a click listener for submit
+        let submit = document.getElementById("submit")
+        submit.addEventListener("click", async () => {
+            const _id = localStorage.getItem('_id')
+            const user = JSON.parse(localStorage.getItem('user'))
+
+            const email = user.email
+
+            let comment = document.getElementById("comment").value
+            let id = _id
+
+            console.log("Submitting this data", comment, email)
+            let resp = await postData('/addcomments', { comment, id, email })
+            if (resp.success) {
+                alert("Your comment has successfully posted")
+                document.getElementById("comment").value = ""
+                fetchComment()
+            }
+
+        })
+
+        fetchPost()
+        fetchComment()
+
+        // Like Dislike
+        // var btn1 = document.querySelector('#green');
+        // var btn2 = document.querySelector('#red');
+        // btn1.addEventListener('click', function () {
+        //     if (btn2.classList.contains('red')) {
+        //         btn2.classList.remove('red');
+        //     }
+        //     this.classList.toggle('green');
+        // });
+        // btn2.addEventListener('click', function () {
+        //     if (btn1.classList.contains('green')) {
+        //         btn1.classList.remove('green');
+        //     }
+        //     this.classList.toggle('red');
+        // });
+    </script>
+</body>
+</html>

@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <title>Home</title>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg shadow bg-light mb-3">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Q-Overflow</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/upload" type="button" data-bs-toggle="modal"
+              data-bs-target="#exampleModal">Upload</a>
+          </li>
+          <!-- <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li> -->
+          <!-- <li class="nav-item">
+                <a class="nav-link disabled">Disabled</a>
+              </li> -->
+        </ul>
+        <!-- <form class="d-flex mx-2" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form> -->
+        <div class="d-flex buttons">
+          <!-- <a href="/login"><button type="button" class="btn btn-outline-primary mx-2">Login</button></a>
+          <a href="/signup"><button type="button" class="btn btn-outline-primary">SignUp</button></a> -->
+          <!-- <button type="button" id="logout" class="btn btn-outline-danger">Logout</button> -->
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Upload Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <!-- <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1> -->
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mt-2" style="text-align:center">
+            <h2>Upload</h2>
+          </div>
+          <div>
+            <div class="mb-3">
+              <label for="title" class="form-label">Title</label>
+              <input type="text" class="form-control" id="title">
+            </div>
+            <div class="mb-3">
+              <label for="subject" class="form-label">Subject</label>
+              <input type="text" class="form-control" id="subject">
+            </div>
+            <div class="form-floating">
+              <textarea class="form-control" placeholder="Leave a comment here" id="desc"
+                style="height: 100px"></textarea>
+              <label for="desc">Description</label>
+                        
+            </div>
+            <input type="number" id="likeCount" name="price" value="0" style="display: none">
+            <input type="number" id="dislikeCount" name="price" value="0" style="display: none">
+            <div class="d-grid gap-2 col-6 mx-auto mb-3">
+              <button id="submit" class="btn btn-primary" type="button">Upload</button>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div> -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Account Modal -->
+  <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mt-2" style="text-align:center">
+            <h2>Delete Account</h2>
+          </div>
+          <div>
+            <div class="mb-3">
+              <h4>Are you sure you want to delete your account?</h4>
+            </div>
+            
+            <div class="d-grid gap-2 col-6 mx-auto mb-3">
+              <button id="deleteAccount" class="btn btn-danger" type="button">Delete Account</button>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div> -->
+      </div>
+    </div>
+  </div>
+  <!-- body -->
+  <div class="container myposts">
+
+  </div>
+  <!-- Optional JavaScript; choose one of the two! -->
+
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
+  <script>
+    async function postData(url = '', data = {}) {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+      let rdata = await response.json()
+      return rdata
+    }
+
+    // toogle buttons
+    function toogleButtons() {
+      const user = JSON.parse(localStorage.getItem('user'))
+    if(user && user.email)
+    {
+      let buttonContainer = document.querySelector(".buttons")
+      buttonContainer.innerHTML = ""
+      let buttons =`
+          <button type="button" id="logout" class="btn btn-outline-danger mx-2">Logout</button>
+          <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+              data-bs-target="#exampleModal1">Delete Account</button>
+          `
+      buttonContainer.innerHTML += buttons
+    }
+    else
+    {
+      let buttonContainer = document.querySelector(".buttons")
+      buttonContainer.innerHTML = ""
+      let buttons =`
+          <a href="/login"><button type="button" class="btn btn-outline-primary mx-2">Login</button></a>
+          <a href="/signup"><button type="button" class="btn btn-outline-primary">SignUp</button></a>
+          `
+      buttonContainer.innerHTML += buttons
+    }
+    }
+
+    // Fetch all the posts
+    async function fetchPosts() {
+      const user = JSON.parse(localStorage.getItem('user'))
+    
+      let noteContainer = document.querySelector(".myposts")
+      noteContainer.innerHTML = ""
+      
+      const posts =await postData('/getposts')
+      if(Object.keys(posts).length ===0){
+        let noteContainer = document.querySelector(".myposts")
+        noteContainer.innerHTML = ""
+        let post = `<h4 class="mt-5" style="text-align:center;">No Posts Available</h4>`
+        noteContainer.innerHTML += post
+      }
+      else{
+      //posts.then((posts) => {
+        console.log("Posts", posts.posts)
+        //populate the posts
+        posts.posts.slice().reverse().forEach(element => {
+          let post=``
+          if(user && user.email && user.email===element.email)
+          {
+            post = `
+            <div class="card shadow mb-2">
+            <div class="card-body">
+            <h5 class="card-title">${element.title}</h5>
+            <p class="card-text">${element.subject}</p>
+            <p class="card-text">${element.desc}</p>
+            <p class="card-text">Uploaded by ${element.name}</p>
+            <button href="#" id="enter" class="btn btn-outline-primary mx-2" data-id=${element._id} onclick="enter(this)">Enter</button>
+            <button href="#" id="delete" class="btn btn-outline-danger mx-2" data-id=${element._id} onclick="enter(this)">Delete</button>
+            <span class="text-success mx-2">Like ${element.likeCount}</span>
+            <span class="text-danger mx-2">Dislike ${element.dislikeCount}</span>
+            </div>
+            </div>`
+          }
+          else
+          {
+            post = `
+            <div class="card shadow mb-2">
+            <div class="card-body">
+            <h5 class="card-title">${element.title}</h5>
+            <p class="card-text">${element.subject}</p>
+            <p class="card-text">${element.desc}</p>
+            <p class="card-text">Uploaded by ${element.name}</p>
+            <button href="#" id="enter" class="btn btn-outline-primary mx-2" data-id=${element._id} onclick="enter(this)">Enter</button>
+            <span class="text-success mx-2">Like ${element.likeCount}</span>
+            <span class="text-danger mx-2">Dislike ${element.dislikeCount}</span>
+            </div>
+            </div>`
+          }
+          noteContainer.innerHTML += post
+        });
+      //})
+      }
+    }
+
+    localStorage.setItem("_id", null)
+    fetchPosts()
+    toogleButtons()
+
+    // Add a click listener for submit
+    let submit = document.getElementById("submit")
+    submit.addEventListener("click", async () => {
+      const user = JSON.parse(localStorage.getItem('user'))
+      if (user && user.email) {
+        let title = document.getElementById("title").value
+        let subject = document.getElementById("subject").value
+        let desc = document.getElementById("desc").value
+        let likeCount = document.getElementById("likeCount").value
+        let dislikeCount = document.getElementById("dislikeCount").value
+        let email = JSON.parse(localStorage.getItem("user"))?.email
+        
+        console.log("Submitting this data", title, subject, desc, email)
+        let resp = await postData('/addposts', { title, subject, desc, likeCount, dislikeCount, email })
+        if (resp.success) {
+          alert("You have successfully posted")
+          document.getElementById("title").value = ""
+          document.getElementById("subject").value = ""
+          document.getElementById("desc").value = ""
+          document.getElementById("likeCount").value = 0
+          document.getElementById("dislikeCount").value = 0
+          fetchPosts()
+        }
+      }
+      else {
+        alert("Please login first")
+        window.location = "/login"
+      }
+    })
+
+    // Add a click listener for logout
+    let logout = document.getElementById("logout")
+    logout.addEventListener("click", () => {
+      localStorage.setItem("user", null)
+      window.location = "/"
+    })
+
+    // Add a click listener for delete account
+    let deleteAccount = document.getElementById("deleteAccount")
+      deleteAccount.addEventListener("click", async () => {
+      const user = JSON.parse(localStorage.getItem('user'))
+      let email = JSON.parse(localStorage.getItem("user"))?.email
+      let resp = await postData('/deleteAccount', { title, subject, desc, email })
+      if(resp.success)
+      {
+        localStorage.setItem("user", null)
+        alert("Your account has been deleted")
+        window.location = "/"
+      }
+      else
+      {
+        alert("Your account could not been been deleted")
+        window.location = "/"
+      }
+    })
+
+    // add a click listener to enter
+    async function enter(button) {
+      let ele = document.getElementById("enter")
+      let id=button.getAttribute('data-id')
+      if(button.getAttribute('id')==="delete")
+      {
+        let resp = await postData('/deleteposts', { id })
+        if(resp.success)
+        {
+          alert("Your post has been deleted")
+          window.location = "/"
+        }
+        else
+        {
+          alert("Your account could not been been deleted")
+          window.location = "/"
+        }
+      }
+      else
+      {
+        const user = JSON.parse(localStorage.getItem('user'))
+        if(user && user.email)
+        {
+          console.log(id)
+          localStorage.setItem("_id", id)
+          window.location = "/post"
+        }
+        else
+        {
+          alert("Please login first")
+          window.location = "/login"
+        }
+      }
+    }
+    
+  </script>
+
+  <!-- Option 2: Separate Popper and Bootstrap JS -->
+  <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+</body>
+
+</html>
